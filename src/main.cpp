@@ -10,9 +10,9 @@ LedController lc = LedController(DATA, CLK, CS);
 template <size_t N>
 void output(const byte (&pinsArray)[N], const int num, const long delayTime)
 {
-    for(int i = 0; i < N; i++) 
+    for (int i = 0; i < N; i++)
         digitalWrite(pinsArray[i], (num & (1 << i)) == 0 ? LOW : HIGH);
-    
+
     delay(delayTime);
 }
 
@@ -24,4 +24,11 @@ void setup()
 
 void loop()
 {
+    for (auto &&item : pins)
+    {
+        digitalWrite(item, HIGH);
+        delay(250);
+        digitalWrite(item, LOW);
+        delay(250);
+    }
 }

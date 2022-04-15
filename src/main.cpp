@@ -15,7 +15,7 @@ void drawImage(LedControl &lc, byte bitmap[8]) {
 template <size_t N>
 void output(byte (&pinsArray)[N], int num, long delayTime) {
     for (size_t i = 0; i < N; i++)
-        digitalWrite(pinsArray[i], (num & (1 << i)) == 0 ? LOW : HIGH);
+        digitalWrite(pinsArray[i], (num & (1 << i)) =! 0);
 
     delay(delayTime);
 }

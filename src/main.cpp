@@ -4,7 +4,7 @@ byte pins[] = {2, 3, 4};               // G1 -> 2  Y1 -> 3  R1 -> 4
 LedControl lc1 = LedControl(10, 9, 8); // DIN1 -> 10 CLK1 -> 9  CS1 -> 8
 
 byte Stop[] = {0x38, 0x38, 0x10, 0x38, 0x54, 0x10, 0x28, 0x44};
-byte Go[] = {0x18, 0x18, 0x08, 0x3c, 0x4a, 0x18, 0x28, 0x24};
+byte Go[] = {0x18, 0x18, 0x08, 0x3c, 0x4a, 0x18, 0x28, 0x44};
 
 inline void drawImage(LedControl &lc, byte bitmap[8]) {
     for (size_t i = 0; i < 8; i++)
@@ -27,8 +27,7 @@ void setup() {
     lc1.shutdown(0, false);
 }
 
-void loop()
-{
+void loop() {
     drawImage(lc1, Stop);
     output(pins, 1 << 0, 1500);
     for (byte i = 0; i < 3; i++) {

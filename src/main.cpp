@@ -4,8 +4,10 @@ byte pins[] = {2, 1, 4, 5, 6, 7}; // G1 -> 2  Y1 -> 1  R1 -> 4 -- G2 -> 5  Y2 ->
 LedControl lc1 = LedControl(10, 9, 8); // DIN1 -> 10 CLK1 -> 9  CS1 -> 8
 LedControl lc2 = LedControl(13, 12, 11); // DIN2 -> 13  CLK2 -> 12  CS2 -> 11
 
-byte Stop[] = {0x38, 0x38, 0x10, 0x38, 0x54, 0x10, 0x28, 0x44};
-byte Go[] = {0x18, 0x18, 0x08, 0x3c, 0x4a, 0x18, 0x28, 0x44};
+byte Stop[] = {0x44, 0x28, 0x10, 0x54, 0x38, 0x10, 0x38, 0x38};
+//byte Stop[] = {0x38, 0x38, 0x10, 0x38, 0x54, 0x10, 0x28, 0x44};
+byte Go[] = {0x44, 0x28, 0x18, 0x4a, 0x3c, 0x08, 0x18, 0x18};
+//byte Go[] = {0x18, 0x18, 0x08, 0x3c, 0x4a, 0x18, 0x28, 0x44};
 
 void drawImage(LedControl &lc, byte bitmap[8]) {
     for (int i = 0; i < 8; i++)
@@ -39,7 +41,6 @@ void TrafficLights(byte greenPin, byte yellowPin, byte redOtherPin, LedControl &
         tone(3, 2500, 150);
         delay(500);
     }
-    
 }
 
 void setup() {
@@ -48,7 +49,11 @@ void setup() {
 
     lc1.setIntensity(0, 8);
     lc1.shutdown(0, false);
-    lc2.setIntensity(0, 8);
+    delay(200);
+    lc1.setIntensity(0, 8);
+    lc1.shutdown(0, false);
+    delay(20);
+    lc2.setIntensity(0, 8)  ;
     lc2.shutdown(0, false);
 }
 

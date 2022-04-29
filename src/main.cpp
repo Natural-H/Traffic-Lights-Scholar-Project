@@ -17,7 +17,7 @@ void drawImage(LedControl &lc, byte bitmap[8]) {
 template <size_t N>
 void output(byte (&pinsArray)[N], int num, unsigned long delayTime = 0) {
     for (size_t i = 0; i < N; i++)
-        digitalWrite(pinsArray[i], (num & (1 << i)) == 0); // Active on low
+        digitalWrite(pinsArray[i], (num & (1 << i)) == 0); // Active in low
 
     delay(delayTime);
 }
@@ -50,7 +50,7 @@ void setup() {
     lc1.setIntensity(0, 8);
     lc1.shutdown(0, false);
     delay(200);
-    lc1.setIntensity(0, 8);
+    lc1.setIntensity(0, 8); // Due to interrupts, I need to call these methods at least two times
     lc1.shutdown(0, false);
     delay(20);
     lc2.setIntensity(0, 8);

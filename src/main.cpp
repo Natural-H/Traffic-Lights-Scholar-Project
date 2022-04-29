@@ -53,7 +53,7 @@ void setup() {
     lc1.setIntensity(0, 8);
     lc1.shutdown(0, false);
     delay(20);
-    lc2.setIntensity(0, 8)  ;
+    lc2.setIntensity(0, 8);
     lc2.shutdown(0, false);
 }
 

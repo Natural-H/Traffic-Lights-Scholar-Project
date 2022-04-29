@@ -10,13 +10,13 @@ byte Go[] = {0x44, 0x28, 0x18, 0x4a, 0x3c, 0x08, 0x18, 0x18};
 //byte Go[] = {0x18, 0x18, 0x08, 0x3c, 0x4a, 0x18, 0x28, 0x44};
 
 void drawImage(LedControl &lc, byte bitmap[8]) {
-    for (int i = 0; i < 8; i++)
+    for (byte i = 0; i < 8; i++)
         lc.setColumn(0, i, bitmap[i]);
 }
 
 template <size_t N>
-void output(byte (&pinsArray)[N], int num, unsigned long delayTime = 0) {
-    for (size_t i = 0; i < N; i++)
+void output(byte (&pinsArray)[N], byte num, unsigned long delayTime = 0) {
+    for (byte i = 0; i < N; i++)
         digitalWrite(pinsArray[i], (num & (1 << i)) == 0); // Active in low
 
     delay(delayTime);

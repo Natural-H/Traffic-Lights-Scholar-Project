@@ -5,9 +5,9 @@ LedControl lc1 = LedControl(10, 9, 8); // DIN1 -> 10 CLK1 -> 9  CS1 -> 8
 LedControl lc2 = LedControl(13, 12, 11); // DIN2 -> 13  CLK2 -> 12  CS2 -> 11
 
 byte Stop[] = {0x44, 0x28, 0x10, 0x54, 0x38, 0x10, 0x38, 0x38};
-//byte Stop[] = {0x38, 0x38, 0x10, 0x38, 0x54, 0x10, 0x28, 0x44};
+//byte Stop[] = {0x38, 0x38, 0x10, 0x38, 0x54, 0x10, 0x28, 0x44}; 180 degrees rotation
 byte Go[] = {0x44, 0x28, 0x18, 0x4A, 0x3C, 0x08, 0x18, 0x18};
-//byte Go[] = {0x18, 0x18, 0x08, 0x3c, 0x4a, 0x18, 0x28, 0x44};
+//byte Go[] = {0x18, 0x18, 0x08, 0x3c, 0x4a, 0x18, 0x28, 0x44}; 180 degrees rotation
 
 void drawImage(LedControl &lc, byte bitmap[8]) {
     for (byte i = 0; i < 8; i++)
@@ -15,9 +15,9 @@ void drawImage(LedControl &lc, byte bitmap[8]) {
 }
 
 template <size_t N>
-void output(byte (&pinsArray)[N], byte num, unsigned long delayTime = 0) {
+void output(byte (&pinsArray)[N], byte value, unsigned long delayTime = 0) {
     for (byte i = 0; i < N; i++)
-        digitalWrite(pinsArray[i], (num & (1 << i)) == 0); // Active in low
+        digitalWrite(pinsArray[i], (value & (1 << i)) == 0); // Active in low
 
     delay(delayTime);
 }
@@ -50,8 +50,8 @@ void setup() {
     lc1.setIntensity(0, 8);
     lc1.shutdown(0, false);
     delay(200);
-    lc1.setIntensity(0, 8); // Due to interrupts, I need to call these methods at least two times
-    lc1.shutdown(0, false);
+    lc1.setIntensity(0, 8); // Due to some strange reason (Idk if interrupts are interfering)
+    lc1.shutdown(0, false); // I need to call these methods twice
     delay(20);
     lc2.setIntensity(0, 8);
     lc2.shutdown(0, false);
